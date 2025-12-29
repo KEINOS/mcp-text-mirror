@@ -1,0 +1,25 @@
+# EditorConfig helps maintain consistent coding styles between editors and IDEs
+# https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Go files: use tabs for indentation
+[*.go]
+indent_style = tab
+
+# Markdown: use spaces and preserve trailing whitespace
+[*.md]
+indent_style = space
+indent_size = 2
+
+# Makefile: MUST use tabs for recipe lines (Make syntax requirement)
+[Makefile]
+indent_style = tab
