@@ -79,10 +79,10 @@ func main() {
 }
 
 // IsDebugMode returns whether debug mode is enabled. If true then logging to a
-// file is enabled.
-// By default, it return fileLogDefault constant value. If 'MCP_TEXT_MIRROR_DEBUG_LOG'
-// env variable is set to a non-empty value, the value is used as the log path
-// and debug mode is enabled.
+// file is enabled. By default, it return fileLogDefault constant value.
+//
+// If 'MCP_TEXT_MIRROR_DEBUG_LOG' environment variable is set to a non-empty
+// value, the value is used as the log path and debug mode is enabled.
 func IsDebugMode() bool {
 	if os.Getenv(envNameDebug) != "" {
 		return true
@@ -91,8 +91,10 @@ func IsDebugMode() bool {
 	return fileLogDefault
 }
 
-// GetLogPath returns the path to the log file. If 'MCP_TEXT_MIRROR_DEBUG_LOG' env
-// variable is set to a non-empty value, it returns the value as the log path.
+// GetLogPath returns the path to the log file.
+//
+// If 'MCP_TEXT_MIRROR_DEBUG_LOG' environment variable is set to a non-empty
+// value, it returns the value as the log path.
 func GetLogPath() string {
 	logPath := filepath.Join(logDir, logName)
 
@@ -163,7 +165,8 @@ func newServer() *mcp.Server {
 		&mcp.ServerOptions{}, //nolint:exhaustruct // use default options
 	)
 
-	// Initialize with zero values then set required fields (avoid exhaustruct linter error)
+	// Initialize with zero values then set required fields (avoid exhaustruct
+	// linter error)
 	toolInfo := new(mcp.Tool)
 	toolInfo.Name = toolName
 	toolInfo.Description = toolDescription
@@ -245,8 +248,8 @@ type MirrorOutput struct {
 // handleReverse returns (meta, output, error) per MCP tool handler contract.
 // The returned output contains the reversed/mirrored input text.
 //
-// If the context is canceled, it returns an error.
-// This tool doesn’t care who called it, so the CallToolRequest parameter is unused.
+// If the context is canceled, it returns an error. This tool doesn’t care who
+// called it, so the CallToolRequest parameter is unused.
 func handleReverse(
 	ctx context.Context,
 	_ *mcp.CallToolRequest,
@@ -258,8 +261,8 @@ func handleReverse(
 	}
 
 	// This is the core function of this tool: reverses the input text
-	// If cancellation during the process (reversal) is needed, consider using `select`
-	// with `ctx.Done()` channel in a loop over grapheme clusters.
+	// If cancellation during the process (reversal) is needed, consider using
+	// `select` with `ctx.Done()` channel in a loop over grapheme clusters.
 	outputText := uniseg.ReverseString(input.Text)
 
 	// log if debug mode is enabled (fileLogDefault = true or env var is set)
