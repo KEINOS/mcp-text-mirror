@@ -4,6 +4,10 @@ A tiny MCP (Model Context Protocol) service written in Go. It mirrors (reverses)
 
 This repository implements a minimal MCP server and a single `mirror` tool to help me/us learn MCP basics and to build something that at minimum works with VS Code's Copilot (via `stdio` transport).
 
+> [!TIP]
+>
+> Article about this project in Japanese: 「[【Golang】最もシンプルな MCP Server を Go で堅牢に実装してみる](https://qiita.com/KEINOS/items/5b7af40b3b9c3a0a0ff5)」@ Qiita
+
 ## Features
 
 - MCP tool that reverses UTF‑8 text
