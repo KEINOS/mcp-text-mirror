@@ -269,6 +269,17 @@ var dataGetServiceVersion = []struct {
 		ok:          false,
 		expected:    "unknown (devel)",
 	},
+	{
+		// Edge case: revision shorter than 7 characters should not panic
+		name:        "short_revision_should_not_panic",
+		hasInfo:     true,
+		mainVersion: "v1.0.0",
+		settings: []debug.BuildSetting{
+			{Key: "vcs.revision", Value: "abc"}, // only 3 chars, shorter than 7
+		},
+		ok:       true,
+		expected: "v1.0.0 (abc)", // should use full short revision
+	},
 }
 
 // =============================================================================
