@@ -34,6 +34,7 @@ const (
 	serviceName    = "text-mirror"
 	serviceVersion = "(devel)" // default version if not set in build info
 	serviceTitle   = "Text mirroring/reversing tool"
+	revisionLen    = 7 // short revision length for display
 
 	toolName        = "mirror"
 	toolDescription = "Reverses the given UTF-8 text"
@@ -121,7 +122,7 @@ func GetServiceVersion() string {
 
 		// revision
 		for _, s := range info.Settings {
-			if s.Key == "vcs.revision" && len(s.Value) >= 7 {
+			if s.Key == "vcs.revision" && s.Value != "" {
 				revision = s.Value
 
 				break
@@ -130,11 +131,11 @@ func GetServiceVersion() string {
 
 		// Found version. E.g.: v1.0.0 (abcdef0)
 		if version != serviceVersion {
-			return fmt.Sprintf("%s (%s)", version, revision[:7])
+			return fmt.Sprintf("%s (%s)", version, revision[:min(len(revision), revisionLen)])
 		}
 	}
 
-	return fmt.Sprintf("%s %s", revision[:7], version)
+	return fmt.Sprintf("%s %s", revision[:min(len(revision), revisionLen)], version)
 }
 
 // ----------------------------------------------------------------------------
